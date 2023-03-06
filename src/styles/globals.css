@@ -10,4 +10,8 @@ body {
   a {
     @apply hover:scale-125;
   }
+
+  h3 {
+    @apply text-lg
+  }
 }

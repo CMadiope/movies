@@ -2,6 +2,7 @@ import MovieItem from "@/components/MovieItem";
 import React, { useState, useEffect } from "react";
 import tmdb from "@/pages/api/tmdb";
 
+
 const Movies = () => {
   const [popular, setPopular] = useState([]);
 
@@ -34,6 +35,7 @@ const Movies = () => {
             title={item.title || item.name}
             release={item.first_air_date || item.release_date}
             path={item.backdrop_path}
+            id={item.id}
           />
         ))}
       </div>

@@ -1,35 +1,22 @@
 import MovieItem from "@/components/MovieItem";
-import React, { useState, useEffect } from "react";
-import tmdb from "@/pages/api/tmdb";
-
+import React from "react";
+import useMoviesData from "@/components/hooks/useMoviesData";
 
 const Movies = () => {
-  const [popular, setPopular] = useState([]);
+  const { isLoading, data, isError, error } = useMoviesData();
 
-  const fetchPopular = async () => {
-    const { data } = await tmdb.get(`movie/popular`);
-
-    if (data.status === 404) {
-      setPopular([]);
-      return;
-    } else {
-      setPopular(data.results);
-      // console.log(popular);
-    }
-  };
-  useEffect(() => {
-    try {
-      fetchPopular();
-    } catch (error) {
-      console.log(err);
-    }
-  }, []);
+  if (isLoading) {
+    return <h3>Loading ...</h3>;
+  }
+  if (isError) {
+    return <h2>{error.message}</h2>;
+  }
 
   return (
     <div className='text-white lg:pl-8'>
       <h1 className=' pt-10 md:pb-10 pb-8'>Popular Movies</h1>
       <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 pb-5 px-5 gap-5 '>
-        {popular?.map((item) => (
+        {data?.data.results.map((item) => (
           <MovieItem
             key={item.id}
             title={item.title || item.name}

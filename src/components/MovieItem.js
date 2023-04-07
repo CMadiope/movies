@@ -7,7 +7,7 @@ const MovieItem = ({ title, release, path, id }) => {
   name = title.replace(/\s+/g, "-");
 
   return (
-    <Link href={`/movie/[id]`} as={`/movie/${name}`} className='hover:scale-90'>
+    <Link href={`/movie/[id]`} as={`/movie/${id}`} className='hover:scale-90'>
       <div className='flex flex-col gap-2'>
         <Image
           src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${path}`}

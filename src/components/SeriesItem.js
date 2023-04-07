@@ -2,13 +2,13 @@ import Image from 'next/image';
 import React from 'react'
 import Link from 'next/link';
 
-const SeriesItem = ({ title, release, path }) => {
+const SeriesItem = ({ title, release, path, id }) => {
 
   let name = title 
   name = title.replace(/\s+/g, '-')
-
+// console.log(id);
   return (
-    <Link href={`/tv/[id]`} as={`/tv/${name}`} className="hover:scale-90">
+    <Link href={`/tv/[id]`} as={`/tv/${id}`} className="hover:scale-90">
       <div className='flex flex-col gap-2'>
         <Image
           src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${path}`}

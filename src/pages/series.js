@@ -23,6 +23,7 @@ const Series = () => {
             title={item.title || item.name}
             release={item.first_air_date || item.release_date}
             path={item.backdrop_path}
+            id={item.id}
           />
         ))}
       </div>

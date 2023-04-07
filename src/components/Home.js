@@ -25,6 +25,8 @@ const Home = () => {
   if (isError) {
     return <h2>{error.message}</h2>;
   }
+    console.log(shows);
+  // console.log(data);
 
   return (
     <div className='text-white pl-8'>
@@ -82,6 +84,7 @@ const Home = () => {
               title={item.title || item.name}
               release={item.first_air_date || item.release_date}
               path={item.backdrop_path}
+              id={item.id}
             />
           ))}
         </div>

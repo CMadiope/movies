@@ -1,42 +1,66 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import tmdb from "@/pages/api/tmdb";
+import Image from "next/image";
 
-const getStaticProps = async (context) => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${context.params.id}?api_key=71544f1c2a2ee7119c4899009c6843b3&language=en-US`
-  );
-  const data = await res.json();
-  return {
-    props: {
-      movie: data[0],
-    },
+const Movie = () => {
+  const router = useRouter();
+  const query = router.query;
+  const [movie, setMovie] = useState(null);
+
+  const fetchMovie = async () => {
+    const { data } = await tmdb.get(`movie/${query.id}`);
+    if (data.status === 404) {
+      setMovie([]);
+    } else {
+      setMovie(data);
+    }
   };
-};
-
-const getStaticPaths = async () => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=71544f1c2a2ee7119c4899009c6843b3&language=en-US&page=1`
-  );
-  const data = await res.json();
-  const ids = data.results.map((item) => item.id);
-
-  const paths = ids.map((item) => ({
-    params: { id: item.toString() },
-  }));
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-const Movie = ({movie }) => {
-  
-  const { id, title, name, backdrop_path, first_air_date, release_date } = movie;
+  useEffect(() => {
+    try {
+      fetchMovie();
+    } catch (error) {
+      console.log();
+    }
+  }, [query.id]);
+  // console.log(movie);
 
   return (
-    <div className='text-white'>
-      <h1>
-        {title || name}
-      </h1>
+    <div className='text-white p-10 grid sm:grid-cols-3'>
+      <div>
+        <Image
+          src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${movie?.backdrop_path}`}
+          alt={movie?.title}
+          width={400}
+          height={100}
+          quality={100}
+          className='rounded-md'
+        />
+      </div>
+      <div className='sm:col-span-2'>
+        <h1 className='text-3xl text-center pt-5 pb-8 font-bold'>
+          {movie?.title}{" "}
+          <span className='font-light text-gray-300'>
+            ({" "}
+            {movie?.release_date.slice(0, 4) ||
+              movie?.first_air_date.slice(0, 4)}
+            )
+          </span>
+        </h1>
+        <p>{movie?.tag_line}</p>
+        <h3 className='px-4 pb-6 text-xl md:px-12'>Overview</h3>
+        <p className='text-gray-300 text-justify px-4 md:px-12 '>
+          {movie?.overview}
+        </p>
+        <div
+          className='w-full  flex justify-center px-10 md:px-20 lg:px-24
+        '
+        >
+          <button className='w-full  bg-white text-black my-8 py-2 rounded-xl hover:scale-105'>
+            add to watchlist
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

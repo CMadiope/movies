@@ -3,18 +3,18 @@ import { useRouter } from "next/router";
 import { BiMovie } from "react-icons/bi";
 import Link from "next/link";
 import { BsPersonCircle } from "react-icons/bs";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 
 const Navbar = () => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   return (
     <nav className='text-gray-500 flex justify-between items-center bg-gray-800/70 py-4 px-6 lg:py-2 rounded-3xl '>
       <div>
-        <Link
-          href='/'
-          className='text-red-500  lg:text-5xl hidden md:flex'
-        >
-          <BiMovie  size={55}/>
+        <Link href='/' className='text-red-500  lg:text-5xl hidden md:flex'>
+          <BiMovie size={55} />
         </Link>
       </div>
 
@@ -43,14 +43,23 @@ const Navbar = () => {
         >
           Bookmarks
         </Link>
-        
       </div>
       <div className=' '>
+        {session ? (
+          <Image
+            src={session.user.image}
+            alt='/'
+            width={50}
+            height={50}
+            className='rounded-full'
+          />
+        ) : (
           <BsPersonCircle
             size={50}
             className='border-2 rounded-full hidden md:flex'
           />
-        </div>
+        )}
+      </div>
     </nav>
   );
 };

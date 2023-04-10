@@ -6,7 +6,7 @@ const SingleItem = ({ title, release, path, id }) => {
   name = title.replace(/\s+/g, "-");
 
   return (
-    <div className='hover:scale-90'>
+    <div className='hover:scale-105'>
       <div className='flex flex-col gap-2'>
         <Image
           src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${path}`}

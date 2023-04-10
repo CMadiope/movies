@@ -11,10 +11,20 @@ const bookmarkSlice = createSlice({
     clearBookmarks: (state) => {
       state.bookmarkList = [];
     },
-    addToBookmark(state, { payload }) {
-      state.bookmarkList = payload
+    addToBookmark: (state, { payload }) => {
+      const newItem = payload;
+      if (!state.bookmarkList.map((item) => item.id).includes(payload.id)) {
+        state.bookmarkList.push({
+          id: newItem.id,
+          title: newItem.title || newItem.name,
+          overview: newItem.overview,
+          release: newItem.first_air_date || newItem.release_date,
+          backdrop_path: newItem.backdrop_path || newItem.poster_path,
+        });
+        // return state.bookmarkList;
+      }
     },
-    removeBookmark(state, { payload }) {
+    removeBookmark: (state, { payload }) => {
       const updatedBookmarkList = state.bookmarkList.filter(
         (item) => item.id !== payload
       );
@@ -25,5 +35,5 @@ const bookmarkSlice = createSlice({
 
 export const { addToBookmark, removeBookmark, clearBookmarks } =
   bookmarkSlice.actions;
-export const getAllBookmarks = (state) => state.bookmarkList.bookmarkList
+
 export default bookmarkSlice.reducer;

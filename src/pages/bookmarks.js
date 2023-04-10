@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
+import SingleItem from "@/components/SingleItem";
 
 const Bookmarks = () => {
   const dispatch = useDispatch();
@@ -17,27 +18,15 @@ const Bookmarks = () => {
 
   return (
     <div className='text-white p-10'>
-      <div className=' grid gap-8'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 pb-5 px-5 gap-5 '>
         {bookmarkItems.map((item, index) => (
-          <div key={index} className='flex items-center'>
-            <div>
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={100}
-                height={50}
-              />
-            </div>
-            <div>
-              <h1 className="pl-6">
-              {item.title} <span>{item.release}</span>
-            </h1>
-            <p className='text-xs text-gray-500 py-2 px-6'>
-              {item.overview}
-            </p>
-            </div>
-            
-          </div>
+          <SingleItem
+            key={item.id}
+            title={item.title || item.name}
+            release={item.first_air_date || item.release_date}
+            path={item.backdrop_path}
+            id={item.id}
+          />
         ))}
       </div>
     </div>

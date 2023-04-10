@@ -12,16 +12,7 @@ const bookmarkSlice = createSlice({
       state.bookmarkList = [];
     },
     addToBookmark(state, { payload }) {
-      const newItem = payload;
-      if (!state.bookmarkList.map((item) => item.id).includes(payload.id)) {
-        state.bookmarkList.push({
-          id: newItem.id,
-          title: newItem.title || newItem.name,
-          overview: newItem.overview,
-          release: newItem.first_air_date || newItem.release_date,
-          image: `https://www.themoviedb.org/t/p/w220_and_h330_face/${newItem.poster_path}`,
-        });
-      }
+      state.bookmarkList = payload
     },
     removeBookmark(state, { payload }) {
       const updatedBookmarkList = state.bookmarkList.filter(
@@ -34,5 +25,5 @@ const bookmarkSlice = createSlice({
 
 export const { addToBookmark, removeBookmark, clearBookmarks } =
   bookmarkSlice.actions;
-
+export const getAllBookmarks = (state) => state.bookmarkList.bookmarkList
 export default bookmarkSlice.reducer;

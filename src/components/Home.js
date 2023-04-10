@@ -8,14 +8,12 @@ import Trending from "./Trending";
 import SingleItem from "./SingleItem";
 
 const Home = () => {
-  const [input, setInput] = useState("");
+ 
 
   const { isLoading, data, isError, error } = useMoviesData();
   const { data: shows } = useTvShow();
 
-  const handleChange = (e) => {
-    setInput(e.target.value);
-  };
+ 
 
   if (isLoading) {
     return <h3>Loading ...</h3>;
@@ -28,16 +26,7 @@ const Home = () => {
 
   return (
     <div className='text-white pl-8'>
-      <div className='flex gap-2  mt-8 py-3 px-6 items-center rounded-3xl md:w-80 '>
-        <BsSearch className='text-xl ' />
-        <input
-          type='text'
-          value={input}
-          onChange={handleChange}
-          placeholder='Search for movies or Tv series'
-          className='bg-transparent w-full outline-none text-white placeholder:text-lg'
-        />
-      </div>
+     
       <div className=''>
         <Trending />
       </div>

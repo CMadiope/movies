@@ -22,6 +22,7 @@ const Movie = () => {
   useEffect(() => {
     try {
       fetchMovie();
+      dispatch()
     } catch (error) {
       console.log();
     }
@@ -30,12 +31,12 @@ const Movie = () => {
 
   const id = movie?.id;
   const title = movie?.title;
-  const image = `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie?.poster_path}`
+  const image = `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie?.poster_path}`;
   const overview = movie?.overview;
   const release =
     movie?.release_date.slice(0, 4) || movie?.first_air_date.slice(0, 4);
 
-    // console.log(image)
+  // console.log(image)
   return (
     <div className='text-white p-10 grid sm:grid-cols-3'>
       <div>
@@ -69,7 +70,7 @@ const Movie = () => {
         >
           <button
             className='w-full  bg-white text-black my-8 py-2 rounded-xl hover:scale-105'
-            onClick={() => dispatch(addToBookmark({ id, image, overview, title,release }))}
+            onClick={() => dispatch(addToBookmark({ movie }))}
           >
             add to watchlist
           </button>

@@ -3,6 +3,7 @@ import tmdb from "@/pages/api/tmdb";
 import useTvShow from "@/components/hooks/useTvShow";
 import SingleItem from "@/components/SingleItem";
 import Link from "next/link";
+import SearchTv from "@/components/SearchTv";
 
 const Series = () => {
   const { isLoading, data, isError, error } = useTvShow();
@@ -16,6 +17,7 @@ const Series = () => {
 
   return (
     <div className='text-white lg:pl-8'>
+    <SearchTv/>
       <h1 className=' pt-10 md:pb-10 pb-8'>Popular Tv Shows</h1>
       <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 pb-5 px-5 gap-5 '>
         {data?.data.results.map((item) => (

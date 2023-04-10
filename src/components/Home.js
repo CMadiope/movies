@@ -4,13 +4,11 @@ import Image from "next/image";
 import useMoviesData from "./hooks/useMoviesData";
 import useTvShow from "./hooks/useTvShow";
 import Link from "next/link";
-import MovieItem from "./MovieItem";
-import SeriesItem from "./SeriesItem";
 import Trending from "./Trending";
+import SingleItem from "./SingleItem";
 
 const Home = () => {
   const [input, setInput] = useState("");
-
 
   const { isLoading, data, isError, error } = useMoviesData();
   const { data: shows } = useTvShow();
@@ -25,7 +23,7 @@ const Home = () => {
   if (isError) {
     return <h2>{error.message}</h2>;
   }
-    console.log(shows);
+  // console.log(shows);
   // console.log(data);
 
   return (
@@ -56,13 +54,14 @@ const Home = () => {
         </div>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 pb-5 px-5 gap-5 '>
           {data?.data.results.slice(0, 10).map((item) => (
-            <MovieItem
-              key={item.id}
-              title={item.title || item.name}
-              release={item.first_air_date || item.release_date}
-              path={item.backdrop_path}
-              id={item.id}
-            />
+            <Link href={`/movie/[id]`} as={`/movie/${item.id}`} key={item.id}>
+              <SingleItem
+                title={item.title || item.name}
+                release={item.first_air_date || item.release_date}
+                path={item.backdrop_path}
+                id={item.id}
+              />
+            </Link>
           ))}
         </div>
       </div>
@@ -79,13 +78,14 @@ const Home = () => {
         </div>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 pb-5 px-5 gap-5 '>
           {shows?.data.results.slice(0, 10).map((item) => (
-            <SeriesItem
-              key={item.id}
-              title={item.title || item.name}
-              release={item.first_air_date || item.release_date}
-              path={item.backdrop_path}
-              id={item.id}
-            />
+            <Link href={`/tv/[id]`} as={`/tv/${item.id}`} key={item.id}>
+              <SingleItem
+                title={item.title || item.name}
+                release={item.first_air_date || item.release_date}
+                path={item.backdrop_path}
+                id={item.id}
+              />
+            </Link>
           ))}
         </div>
       </div>

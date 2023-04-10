@@ -1,13 +1,12 @@
-import Image from "next/image";
 import React from "react";
-import Link from "next/link";
+import Image from "next/image";
 
-const MovieItem = ({ title, release, path, id }) => {
+const SingleItem = ({ title, release, path, id }) => {
   let name = title;
   name = title.replace(/\s+/g, "-");
 
   return (
-    <Link href={`/movie/[id]`} as={`/movie/${id}`} className='hover:scale-90'>
+    <div className='hover:scale-90'>
       <div className='flex flex-col gap-2'>
         <Image
           src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${path}`}
@@ -22,8 +21,8 @@ const MovieItem = ({ title, release, path, id }) => {
           <p className='text-xs '>{release}</p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
-export default MovieItem;
+export default SingleItem;

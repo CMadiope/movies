@@ -37,7 +37,7 @@ const Home = () => {
             href='/movies'
             className='text-base flex items-center gap-2 text-blue-300'
           >
-            <p>view all</p>
+            <p>See more</p>
             <BsArrowRightCircleFill />
           </Link>
         </div>
@@ -61,7 +61,7 @@ const Home = () => {
             href='/series'
             className='text-base flex items-center gap-2 text-blue-300'
           >
-            <p>view all</p>
+            <p>See more</p>
             <BsArrowRightCircleFill />
           </Link>
         </div>

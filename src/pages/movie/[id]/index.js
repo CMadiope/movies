@@ -4,12 +4,22 @@ import tmdb from "@/pages/api/tmdb";
 import Image from "next/image";
 import { addToBookmark } from "@/store/bookmarkSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Movie = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const query = router.query;
   const [movie, setMovie] = useState(null);
+
+  const notify = () => {
+    toast("The movie has been added to your list");
+  };
+  const AddMovie = () => {
+    dispatch(addToBookmark({ id, backdrop_path, overview, title, release }));
+    toast.success("The movie has been added to your list", { autoClose: 3000 });
+    toast.POSITION.BOTTOM_LEFT;
+  };
 
   const fetchMovie = async () => {
     const { data } = await tmdb.get(`movie/${query.id}`);
@@ -30,7 +40,7 @@ const Movie = () => {
 
   const id = movie?.id;
   const title = movie?.title;
-  const backdrop_path = movie?.backdrop_path || movie?.poster_path; ;
+  const backdrop_path = movie?.backdrop_path || movie?.poster_path;
   const overview = movie?.overview;
   const release =
     movie?.release_date.slice(0, 4) || movie?.first_air_date.slice(0, 4);
@@ -69,9 +79,7 @@ const Movie = () => {
         >
           <button
             className='w-full  bg-white text-black my-8 py-2 rounded-xl hover:scale-105'
-            onClick={() =>
-              dispatch(addToBookmark({ id, backdrop_path, overview, title, release }))
-            }
+            onClick={AddMovie}
           >
             add to watchlist
           </button>

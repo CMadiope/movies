@@ -44,7 +44,7 @@ const Navbar = () => {
           Bookmarks
         </Link>
       </div>
-      <div className=' '>
+      <Link href='/profile' className='cursor-pointer '>
         {session ? (
           <Image
             src={session.user.image}
@@ -59,7 +59,7 @@ const Navbar = () => {
             className='border-2 rounded-full hidden md:flex'
           />
         )}
-      </div>
+      </Link>
     </nav>
   );
 };

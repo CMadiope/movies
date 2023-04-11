@@ -4,12 +4,19 @@ import Image from "next/image";
 import tmdb from "@/pages/api/tmdb";
 import { addToBookmark } from "@/store/bookmarkSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Series = () => {
   const router = useRouter();
   const query = router.query;
   const [series, setSeries] = useState(null);
   const dispatch = useDispatch();
+
+  const AddSeries = () => {
+    dispatch(addToBookmark({ id, backdrop_path, overview, title, release }));
+    toast.success("The show has been added to your list", { autoClose: 3000 });
+    toast.POSITION.BOTTOM_LEFT;
+  }
 
   const fetchSeries = async () => {
     const { data } = await tmdb.get(`tv/${query.id}`);
@@ -62,10 +69,7 @@ const Series = () => {
         >
           <button
             className='w-full  bg-white text-black my-8 py-2 rounded-xl hover:scale-105'
-            onClick={() =>
-              dispatch(
-                addToBookmark({ id, backdrop_path, overview, title, release })
-              )
+            onClick={AddSeries
             }
           >
             add to watchlist

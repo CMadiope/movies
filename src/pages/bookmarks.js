@@ -4,11 +4,14 @@ import SingleItem from "@/components/SingleItem";
 import { RxCross2 } from "react-icons/rx";
 import { removeBookmark } from "@/store/bookmarkSlice";
 import { useSession, signOut, signIn } from "next-auth/react";
+import {toast} from 'react-toastify'
 
 const Bookmarks = () => {
   const dispatch = useDispatch();
   const bookmarkItems = useSelector((state) => state.bookmark.bookmarkList);
   const { data: session } = useSession();
+
+  
 
   // console.log(bookmarkItems);
   if (bookmarkItems.length < 1) {

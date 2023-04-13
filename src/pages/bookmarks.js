@@ -40,7 +40,7 @@ const Bookmarks = () => {
                 id={item.id}
               />
               <div
-                className='absolute top-[15%] text-xl left-[2%] cursor-pointer '
+                className='absolute max-xs:top-[20%] top-[8%] text-xl left-[2%] cursor-pointer '
                 onClick={() => dispatch(removeBookmark(item.id))}
               >
                 <RxCross2 />

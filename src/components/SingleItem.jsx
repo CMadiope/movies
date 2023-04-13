@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const SingleItem = ({ title, release, path, id }) => {
   let name = title;
-  name = title.replace(/\s+/g, "-");
+  name = title?.replace(/\s+/g, "-");
 
   return (
     <div className='hover:scale-105'>

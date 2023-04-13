@@ -24,16 +24,11 @@ const Bookmarks = () => {
   if (session) {
     return (
       <div className='text-white p-10'>
-        <div className='flex justify-between'>
+        <div className='flex text-center'>
           <h1 className='text-base py-4'>
             Welcome, {session.user.name} these are your bookmarks
           </h1>
-          <button
-            className='text-sm bg-red-400 rounded-xl px-4 py-1'
-            onClick={() => signOut()}
-          >
-            Sign out
-          </button>
+          
         </div>
 
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 pb-5 px-5 gap-5 '>

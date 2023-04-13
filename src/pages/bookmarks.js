@@ -30,7 +30,7 @@ const Bookmarks = () => {
           </h1>
         </div>
 
-        <div className='grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 pb-5 px-5 gap-5'>
+        <div className='grid  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 pb-5 px-5 gap-5'>
           {bookmarkItems.map((item, index) => (
             <div key={item.id} className='relative'>
               <SingleItem
